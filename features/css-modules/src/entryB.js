@@ -1,5 +1,3 @@
-import b, { something } from "./actual_b.module.scss";
-
-export { something };
+import b from "./actual_b.module.scss";
 
 export default b;

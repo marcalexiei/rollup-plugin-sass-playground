@@ -11,25 +11,21 @@ export default defineConfig({
   },
   plugins: [
     sass({
-      processor: async (styles) => {
-        let scopedClassNames = {};
+      insert: true,
+      processor: async (styles, id) => {
+        let cssModules = {};
         const postcssProcessResult = await postcss([
           postcssModules({
             getJSON: (_, json) => {
-              if (json) scopedClassNames = json;
+              if (json) cssModules = json;
             },
           }),
-        ]).process(styles, {
-          from: undefined,
-        });
+        ]).process(styles, { from: id });
 
-        console.info("processor", scopedClassNames);
-        console.info("processor", {
-          ...scopedClassNames,
+        return {
           css: postcssProcessResult.css,
-        });
-
-        return { ...scopedClassNames, css: postcssProcessResult.css };
+          cssModules: cssModules,
+        };
       },
     }),
   ],
