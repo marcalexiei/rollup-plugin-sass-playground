@@ -7,5 +7,10 @@ export default defineConfig({
     dir: "dist",
     preserveModules: true,
   },
-  plugins: [sass({ insert: true })],
+  plugins: [
+    sass({
+      insert: true,
+      api: "modern",
+    }),
+  ],
 });

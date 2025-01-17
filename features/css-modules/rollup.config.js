@@ -12,6 +12,7 @@ export default defineConfig({
   plugins: [
     sass({
       insert: true,
+      api: "modern",
       processor: async (styles, id) => {
         let cssModules = {};
         const postcssProcessResult = await postcss([
